@@ -141,16 +141,16 @@ const int songLength = 18;
 DHT dht(DHTPIN, DHTTYPE);
 LiquidCrystal lcd(12, 11, 5, 4, 3, 2);
 
-char notes1[] = "05,11,12,13,12,11,11 05,11,12,13,12,11,12,13,13"; // a space represents a rest
+char notes1[] = "05,11,12,13,12,11,11, ,05,11,12,13,12,11,12,13,13"; // a space represents a rest
 
 
-int beats1[] = {2,1,1,1,2,1,1,4,2,1,1,1,2,1,2,1,1};
+int beats1[] = { 1, 1, 1, 1, 2,1, 5,4, 1, 1, 1, 1, 2,1,2, 2, 1};
 
 
-char notes2[] = "05,11,12,13,12,11,11 05,11,12,13,12,11,12,13,13"; // a space represents a rest
+char notes2[] = "06,07,11, ,05,05,12,11,06,06,06,06,06,07,11"; // a space represents a rest
 
 
-int beats2[] = {2,1,1,1,2,1,1,4,2,1,1,1,2,1,2,1,1};
+int beats2[] = {2,2, 6,4,2,2,6,4,2,2,2,2,4,2,4,6};
 
 // The tempo is how fast to play the song.
 // To make the song play faster, decrease this value.
@@ -267,15 +267,15 @@ if(digitalRead(buttonPinS1) == LOW && counter%3 == 0)
   
   for (i = 0; i < songLength; i++) // step through the song arrays
   {
-    duration = beats1[i] * tempo;  // length of note/rest in ms
+    duration = beats2[i] * tempo;  // length of note/rest in ms
     
-    if (notes1[i] == ' ')          // is this a rest? 
+    if (notes2[i] == ' ')          // is this a rest? 
     {
       delay(duration);            // then pause for a moment
     }
     else                          // otherwise, play the note
     {
-      tone(buzzerPin, frequency(notes1[i]), duration);
+      tone(buzzerPin, frequency(notes2[i]), duration);
       delay(duration);            // wait for tone to finish
     }
     delay(tempo/10);              // brief pause between notes
@@ -306,8 +306,12 @@ if(digitalRead(buttonPinS1) == LOW && counter%3 == 0)
      
      
       if(digitalRead(buttonPinS4) == LOW){
-           
-      if (t>25 && t<30)
+   int counter2;
+for (counter2=1;digitalRead(buttonPinS4) == LOW;counter2++)   {
+  
+  if (counter2%11 != 1)
+  {
+      if (t>20 && t<25)
       {
        lcd.clear();
    lcd.print(" A Great Day~ "); 
@@ -317,7 +321,17 @@ if(digitalRead(buttonPinS1) == LOW && counter%3 == 0)
     delay(1000);
       }
       
-      if (t<=25)
+      if ( t <= 10)
+
+ {
+       lcd.clear();
+   lcd.print("  Frezzing ///"); 
+   lcd.setCursor(0,1);
+   lcd.print("   Q=A=Q /  ");   
+  
+    delay(1000);
+      }
+      if (t<=20 && t > 10)
 
  {
        lcd.clear();
@@ -327,8 +341,36 @@ if(digitalRead(buttonPinS1) == LOW && counter%3 == 0)
   
     delay(1000);
       }
+      if ( t >= 25)
+
+ {
+       lcd.clear();
+   lcd.print("  Getting Hot!"); 
+   lcd.setCursor(0,1);
+   lcd.print("   o(*//A//*)q   ");   
+  
+    delay(1000);
+      }
+  }//if
+  
+  else if (counter2%11 == 1 && counter2%2 == 0)
+  {
+  lcd.clear();
+   lcd.print("  Hey dont touch me"); 
+   lcd.setCursor(0,1);
+   lcd.print("   (/￣3￣)/   "); 
+  counter2=1;
+  }
+  else {
+  
+    lcd.clear();
+   lcd.print(" Dude time to study!"); 
+   lcd.setCursor(0,1);
+   lcd.print("   (/=.=)/  DDL "); 
+  
+  }
       
-      
+} //forloop
 
                                          }
       
@@ -360,8 +402,8 @@ int frequency(char note)
   // For the "char" (character) type, we put single characters
   // in single quotes.
 
-  char names[] = { '01', '02', '03', '04', '05', '06', '07', '11','12','13','14','15','16','17'};
-  int frequencies[] = {262, 294, 330, 349, 392, 440, 494, 523,554,587,622,659,698,740};
+  char names[] = { '01', '03', '03', '04', '05', '06', '07', '11','12','13','14','15','16','17'};
+  int frequencies[] = {262, 294, 330, 349, 392, 440, 494, 523, 587, 659, 698, 784, 880, 988};
   
   // Now we'll search through the letters in the array, and if
   // we find it, we'll return the frequency for that note.
