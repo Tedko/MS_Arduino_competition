@@ -144,13 +144,13 @@ LiquidCrystal lcd(12, 11, 5, 4, 3, 2);
 char notes1[] = "05,11,12,13,12,11,11, ,05,11,12,13,12,11,12,13,13"; // a space represents a rest
 
 
-int beats1[] = { 1, 1, 1, 1, 2,1, 5,4, 1, 1, 1, 1, 2,1,2, 2, 1};
+int beats1[] = {1,1,1,1,2,1,5,4, 1, 1, 1, 1, 2,1,2, 2, 1};
 
 
 char notes2[] = "06,07,11, ,05,05,12,11,06,06,06,06,06,07,11"; // a space represents a rest
 
 
-int beats2[] = {2,2, 6,4,2,2,6,4,2,2,2,2,4,2,4,6};
+int beats2[] = {1,1,3,2,1,1,3,2,1,1,1,1,2,1,2,3};
 
 // The tempo is how fast to play the song.
 // To make the song play faster, decrease this value.
